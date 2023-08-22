@@ -19,7 +19,9 @@ const Login = () => {
     const loginHandler = (e) => {
         e.preventDefault();                                        //after submiting the form the page will not reload
 
-        dispatch(loginUser(email, password));
+        dispatch(loginUser(email, password))
+        .then((response) => console.log(response))
+        .catch(error => console.log(error))
     };
 
     

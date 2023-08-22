@@ -2,9 +2,12 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 exports.isAuthenticated = async (req, res, next) => {
+    console.log("Checking authication");
     try {
         
-        const { token } =req.cookies;
+        // const { token } =req.cookies;
+        const token=req.headers['token']
+
 
 
     //if token not found then this and if found then stores hid data by id

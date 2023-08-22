@@ -79,14 +79,15 @@ exports.login = async (req, res) => {
         }
 
         const token = await user.generateToken();                     //generateToken is method
-
+        console.log(token);
         const options = {
             expires:new Date(Date.now()+90*24*60*60*1000),
             httpOnly: true,
         };
 
         res.status(200).cookie("token", token,options)        //used jwt token generated from above method and setted session expire time 90 days
-        .json({                 
+        .json({
+            message: "Login succesful",                 
             success:true,
             user,
             token,

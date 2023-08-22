@@ -1,5 +1,15 @@
 import axios from "axios";
 
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.indexOf(name + "=") === 0) {
+        return cookie.substring(name.length + 1, cookie.length);
+      }
+    }
+    return null;
+  }
 
 //accesing api request to postman for login api
 //sending login data to api
@@ -20,7 +30,15 @@ export const loginUser = (email, password)=> async (dispatch) =>{
               },
             }
         );
-
+        console.log(data);
+        const token = data.token;
+        function setCookie(name, value, days) {
+            const expiration = new Date();
+            expiration.setTime(expiration.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + expiration.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+          }
+        setCookie("token", token, 7);
         dispatch({                                          //Loginsuccess
             type:"LoginSuccess",
             payload: data.user,
@@ -58,12 +76,18 @@ export const loadUser = ()=> async (dispatch) =>{
 
 
 export const getFollowingPosts = () => async (dispatch) => {
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "postOfFollowingRequest",                              //requesting
         });
 
-        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/posts");                 //fatching data from api
+        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/posts",{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "postOfFollowingSuccess",                               
@@ -80,12 +104,20 @@ export const getFollowingPosts = () => async (dispatch) => {
 
 
 export const getMyPosts = () => async (dispatch) => {
+
+    
+      const token = getCookie("token");
+
     try {
         dispatch({
             type: "myPostsRequest",                              //requesting
         });
 
-        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/my/posts");                 //fatching data from api
+        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/my/posts",{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "myPostsSuccess",                               
@@ -106,12 +138,18 @@ export const getMyPosts = () => async (dispatch) => {
 export const getAllUsers = 
     () =>                            //name = ""
     async (dispatch) => {
+        const token = getCookie("token");
+
     try {
         dispatch({
             type: "allUsersRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/users`);                 //fatching data from api ?name=${name}
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/users`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api ?name=${name}
 
         dispatch({
             type: "allUsersSuccess",                               
