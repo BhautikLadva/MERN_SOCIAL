@@ -12,7 +12,7 @@ export const loginUser = (email, password)=> async (dispatch) =>{
         });
         
         const { data } = await axios.post(                   //if login success then 
-            "/api/v1/login",                               //backend route path for login
+            "https://matic-swap.onrender.com/api/v1/login",                               //backend route path for login
             { email, password },
             {
               headers:{
@@ -42,7 +42,7 @@ export const loadUser = ()=> async (dispatch) =>{
             type:"LoadUserRequest"
         });
         
-        const { data } = await axios.get("/api/v1/me",);
+        const { data } = await axios.get("https://matic-swap.onrender.com/api/v1/me",);
 
         dispatch({                                          
             type:"LoadUserSuccess",
@@ -63,7 +63,7 @@ export const getFollowingPosts = () => async (dispatch) => {
             type: "postOfFollowingRequest",                              //requesting
         });
 
-        const {data} = await axios.get("/api/v1/posts");                 //fatching data from api
+        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/posts");                 //fatching data from api
 
         dispatch({
             type: "postOfFollowingSuccess",                               
@@ -85,7 +85,7 @@ export const getMyPosts = () => async (dispatch) => {
             type: "myPostsRequest",                              //requesting
         });
 
-        const {data} = await axios.get("/api/v1/my/posts");                 //fatching data from api
+        const {data} = await axios.get("https://matic-swap.onrender.com/api/v1/my/posts");                 //fatching data from api
 
         dispatch({
             type: "myPostsSuccess",                               
@@ -111,7 +111,7 @@ export const getAllUsers =
             type: "allUsersRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`/api/v1/users`);                 //fatching data from api ?name=${name}
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/users`);                 //fatching data from api ?name=${name}
 
         dispatch({
             type: "allUsersSuccess",                               
@@ -135,7 +135,7 @@ export const logoutUser = ()=> async (dispatch) =>{
             type:"LogoutUserRequest"
         });
         
-        await axios.get("/api/v1/logout");
+        await axios.get("https://matic-swap.onrender.com/api/v1/logout");
 
         dispatch({                                          //Logoutsuccess
             type:"LogoutUserSuccess",
@@ -158,7 +158,7 @@ export const registerUser = (name,email, password, avatar)=> async (dispatch) =>
         });
         
         const { data } = await axios.post(                    
-            "/api/v1/register",                               
+            "https://matic-swap.onrender.com/api/v1/register",                               
             { name,email, password, avatar},
             {
               headers:{
@@ -189,7 +189,7 @@ export const updateProfile = (name,email, avatar)=> async (dispatch) =>{
         });
         
         const { data } = await axios.put(                    
-            "/api/v1/update/profile",                               
+            "https://matic-swap.onrender.com/api/v1/update/profile",                               
             { name,email, avatar},
             {
               headers:{
@@ -221,7 +221,7 @@ export const updatePassword = (oldPassword, newPassword)=> async (dispatch) =>{
         });
         
         const { data } = await axios.put(                    
-            "/api/v1/update/password",                               
+            "https://matic-swap.onrender.com/api/v1/update/password",                               
             { oldPassword, newPassword},
             {
               headers:{
@@ -252,7 +252,7 @@ export const deleteMyProfile = ()=> async (dispatch) =>{
             type:"deleteProfileRequest"
         });
         
-        const { data } = await axios.delete("/api/v1/delete/me");
+        const { data } = await axios.delete("https://matic-swap.onrender.com/api/v1/delete/me");
 
         dispatch({                                          
             type:"deleteProfileSuccess",
@@ -278,7 +278,7 @@ export const forgotPassword = (email)=> async (dispatch) =>{
         });
         
         const { data } = await axios.post(
-        "/api/v1/forgot/password", 
+        "https://matic-swap.onrender.com/api/v1/forgot/password", 
         {
             email,
         },
@@ -312,7 +312,7 @@ export const resetPassword = (token, password)=> async (dispatch) =>{
         });
         
         const { data } = await axios.put(
-        `/api/v1/password/reset/${token}`, 
+        `https://matic-swap.onrender.com/api/v1/password/reset/${token}`, 
         {
             password,
         },
@@ -343,7 +343,7 @@ export const getUserPosts = (id) => async (dispatch) => {
             type: "userPostsRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`/api/v1/userposts/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/userposts/${id}`);                 //fatching data from api
 
         dispatch({
             type: "userPostsSuccess",                               
@@ -365,7 +365,7 @@ export const getUserProfile = (id) => async (dispatch) => {
             type: "userProfileRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`/api/v1/user/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/user/${id}`);                 //fatching data from api
 
         dispatch({
             type: "userProfileSuccess",                               
@@ -388,7 +388,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
             type: "followUserRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`/api/v1/follow/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/follow/${id}`);                 //fatching data from api
 
         dispatch({
             type: "followUserSuccess",                               

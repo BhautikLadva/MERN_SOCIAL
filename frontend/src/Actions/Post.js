@@ -8,7 +8,7 @@ export const likePost = (id) => async (dispatch) => {
             type: "likeRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`/api/v1/post/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/post/${id}`);                 //fatching data from api
 
         dispatch({
             type: "likeSuccess",                               
@@ -30,7 +30,7 @@ export const addCommentOnPost = (id, comment) => async (dispatch) => {
             type: "addCommentRequest",                              //requesting
         });
 
-        const {data} = await axios.put(`/api/v1/post/comment/${id}`,{                 //fatching data from api
+        const {data} = await axios.put(`https://matic-swap.onrender.com/api/v1/post/comment/${id}`,{                 //fatching data from api
             comment
         },{
             headers:{
@@ -59,7 +59,7 @@ export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
             type: "deleteCommentRequest",                              //requesting
         });
 
-        const {data} = await axios.delete(`/api/v1/post/comment/${id}`,                 //fatching data from api
+        const {data} = await axios.delete(`https://matic-swap.onrender.com/api/v1/post/comment/${id}`,                 //fatching data from api
          {
             data: {commentId},
          });                 
@@ -85,7 +85,7 @@ export const createNewPost = (caption, image) => async (dispatch) => {
             type: "newPostRequest",                              //requesting
         });
 
-        const {data} = await axios.post(`/api/v1/post/upload`,                 //fatching data from api
+        const {data} = await axios.post(`https://matic-swap.onrender.com/api/v1/post/upload`,                 //fatching data from api
          {
             caption,
             image,
@@ -115,7 +115,7 @@ export const updatePost = (caption, id) => async (dispatch) => {
             type: "updateCaptionRequest",                              //requesting
         });
 
-        const {data} = await axios.put(`/api/v1/post/${id}`,                 //fatching data from api
+        const {data} = await axios.put(`https://matic-swap.onrender.com/api/v1/post/${id}`,                 //fatching data from api
          {
             caption,
          },{
@@ -145,7 +145,7 @@ export const deletePost = ( id) => async (dispatch) => {
             type: "deletePostRequest",                              //requesting
         });
 
-        const {data} = await axios.delete(`/api/v1/post/${id}`);                 //fatching data from api             
+        const {data} = await axios.delete(`https://matic-swap.onrender.com/api/v1/post/${id}`);                 //fatching data from api             
 
         dispatch({
             type: "deletePostSuccess",                               
