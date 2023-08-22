@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
+app.use(cors());
+
 
 if(process.env.NODE_ENV !== "production"){
     require("dotenv").config({ path:".env"})
