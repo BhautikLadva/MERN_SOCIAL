@@ -3,11 +3,23 @@
 const express = require('express');
 const cors = require('cors');
 const { connectDatabase } = require('./config/database');
-// const app = express();
+const app = express();
 require("dotenv").config();
 
-const app = require("./app");
-app.use(cors());
+// const app = require("./app");
+// app.use(cors());
+
+const allowedOrigins = ['https://maticswap.netlify.app'];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 // const port = 4000;
 const port = process.env.PORT;
