@@ -1,13 +1,30 @@
 import axios from "axios";
 
+function getCookie(name) {                                        //global function for token
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.indexOf(name + "=") === 0) {
+        return cookie.substring(name.length + 1, cookie.length);
+      }
+    }
+    return null;
+  };
 
 export const likePost = (id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "likeRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/post/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/post/${id}`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "likeSuccess",                               
@@ -24,6 +41,9 @@ export const likePost = (id) => async (dispatch) => {
 
 //for adding comment
 export const addCommentOnPost = (id, comment) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "addCommentRequest",                              //requesting
@@ -34,6 +54,7 @@ export const addCommentOnPost = (id, comment) => async (dispatch) => {
         },{
             headers:{
                 "Content-Type":"application/json",
+                token,
             }
         });                 
 
@@ -53,6 +74,9 @@ export const addCommentOnPost = (id, comment) => async (dispatch) => {
 
 //for deleting comment on post
 export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "deleteCommentRequest",                              //requesting
@@ -61,7 +85,11 @@ export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
         const {data} = await axios.delete(`https://matic-swap.onrender.com/api/v1/post/comment/${id}`,                 //fatching data from api
          {
             data: {commentId},
-         });                 
+         },{
+            headers: {
+              token
+            },
+          });                 
 
         dispatch({
             type: "deleteCommentSuccess",                               
@@ -79,6 +107,9 @@ export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
 
 //for creating new post
 export const createNewPost = (caption, image) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "newPostRequest",                              //requesting
@@ -91,6 +122,7 @@ export const createNewPost = (caption, image) => async (dispatch) => {
          },{
             headers: {
                 "Content-Type": "application/json",
+                token,
             },
          });                 
 
@@ -109,6 +141,9 @@ export const createNewPost = (caption, image) => async (dispatch) => {
 
 //updating caption on post
 export const updatePost = (caption, id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "updateCaptionRequest",                              //requesting
@@ -120,6 +155,7 @@ export const updatePost = (caption, id) => async (dispatch) => {
          },{
             headers: {
                 "Content-Type": "application/json",
+                token,
             },
          });                 
 
@@ -139,12 +175,19 @@ export const updatePost = (caption, id) => async (dispatch) => {
 
 //deleting post
 export const deletePost = ( id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "deletePostRequest",                              //requesting
         });
 
-        const {data} = await axios.delete(`https://matic-swap.onrender.com/api/v1/post/${id}`);                 //fatching data from api             
+        const {data} = await axios.delete(`https://matic-swap.onrender.com/api/v1/post/${id}`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api             
 
         dispatch({
             type: "deletePostSuccess",                               

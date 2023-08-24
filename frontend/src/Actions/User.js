@@ -54,13 +54,19 @@ export const loginUser = (email, password)=> async (dispatch) =>{
 
 export const loadUser = ()=> async (dispatch) =>{
 
+    const token = getCookie("token");
+
     try {
 
         dispatch({                                         
             type:"LoadUserRequest"
         });
         
-        const { data } = await axios.get("https://matic-swap.onrender.com/api/v1/me",);
+        const { data } = await axios.get("https://matic-swap.onrender.com/api/v1/me",{
+            headers: {
+              token
+            },
+          });
 
         dispatch({                                          
             type:"LoadUserSuccess",
@@ -255,6 +261,8 @@ export const updateProfile = (name,email, avatar)=> async (dispatch) =>{
 
 export const updatePassword = (oldPassword, newPassword)=> async (dispatch) =>{
 
+    const token = getCookie("token");
+
     try {
 
         dispatch({                                         
@@ -267,6 +275,7 @@ export const updatePassword = (oldPassword, newPassword)=> async (dispatch) =>{
             {
               headers:{
                 "Content-Type":"application/json",
+                token,
               },
             }
         );
@@ -287,13 +296,19 @@ export const updatePassword = (oldPassword, newPassword)=> async (dispatch) =>{
 //for delete profile
 export const deleteMyProfile = ()=> async (dispatch) =>{
 
+    const token = getCookie("token");
+
     try {
 
         dispatch({                                         
             type:"deleteProfileRequest"
         });
         
-        const { data } = await axios.delete("https://matic-swap.onrender.com/api/v1/delete/me");
+        const { data } = await axios.delete("https://matic-swap.onrender.com/api/v1/delete/me",{
+            headers: {
+              token
+            },
+          });
 
         dispatch({                                          
             type:"deleteProfileSuccess",
@@ -379,12 +394,19 @@ export const resetPassword = (token, password)=> async (dispatch) =>{
 
 
 export const getUserPosts = (id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "userPostsRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/userposts/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/userposts/${id}`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "userPostsSuccess",                               
@@ -401,12 +423,19 @@ export const getUserPosts = (id) => async (dispatch) => {
 
 
 export const getUserProfile = (id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "userProfileRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/user/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/user/${id}`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "userProfileSuccess",                               
@@ -424,12 +453,19 @@ export const getUserProfile = (id) => async (dispatch) => {
 
 
 export const followAndUnfollowUser = (id) => async (dispatch) => {
+
+    const token = getCookie("token");
+
     try {
         dispatch({
             type: "followUserRequest",                              //requesting
         });
 
-        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/follow/${id}`);                 //fatching data from api
+        const {data} = await axios.get(`https://matic-swap.onrender.com/api/v1/follow/${id}`,{
+            headers: {
+              token
+            },
+          });                 //fatching data from api
 
         dispatch({
             type: "followUserSuccess",                               
