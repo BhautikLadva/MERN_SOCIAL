@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function getCookie(name) {
+function getCookie(name) {                                        //global function for token
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
@@ -9,7 +9,7 @@ function getCookie(name) {
       }
     }
     return null;
-  }
+  };
 
 //accesing api request to postman for login api
 //sending login data to api
@@ -220,6 +220,8 @@ export const registerUser = (name,email, password, avatar)=> async (dispatch) =>
 
 export const updateProfile = (name,email, avatar)=> async (dispatch) =>{
 
+    const token = getCookie("token");
+
     try {
 
         dispatch({                                         
@@ -232,6 +234,7 @@ export const updateProfile = (name,email, avatar)=> async (dispatch) =>{
             {
               headers:{
                 "Content-Type":"application/json",
+                token,
               },
             }
         );

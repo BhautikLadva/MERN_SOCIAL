@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 export const likePost = (id) => async (dispatch) => {
     try {
         dispatch({
